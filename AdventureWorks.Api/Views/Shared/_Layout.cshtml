@@ -21,8 +21,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("Product", "Get", "Product", new { area = "" }, null)</li>
+                    <li>@Html.RouteLink("Product", "DefaultApi", new { controller = "Product" })</li>
                 </ul>
             </div>
         </div>
