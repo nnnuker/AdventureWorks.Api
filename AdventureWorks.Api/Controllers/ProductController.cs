@@ -1,4 +1,5 @@
 ﻿using AdventureWorks.Api.Services.Production;
+using Serilog;
 using System.Collections.Generic;
 using System.Web.Http;
 
@@ -16,7 +17,15 @@ namespace AdventureWorks.Api.Controllers
     // GET api/products
     public IEnumerable<Product> Get()
     {
-      return _productService.GetProducts();
+      try
+      {
+        return _productService.GetProducts();
+      }
+      catch (System.Exception ex)
+      {
+        Log.Error("An exception was thrown in api/product", ex);
+        throw;
+      }
     }
 
     // GET api/products/5

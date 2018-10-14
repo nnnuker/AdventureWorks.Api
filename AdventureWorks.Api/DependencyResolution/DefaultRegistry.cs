@@ -20,6 +20,7 @@ namespace AdventureWorks.Api.DependencyResolution
   using AdventureWorks.Api.Infrastructure;
   using AdventureWorks.Api.Services.Infrastructure;
   using AdventureWorks.Api.Services.Production;
+  using Serilog;
   using StructureMap.Configuration.DSL;
   using StructureMap.Graph;
 
@@ -37,6 +38,13 @@ namespace AdventureWorks.Api.DependencyResolution
           });
       For<IProductService>().Use<ProductService>();
       For<ISqlConnectionFactory>().Use<SqlConnectionFactory>();
+
+      var logger = new LoggerConfiguration()
+        .MinimumLevel.Warning()
+        .WriteTo.File("D:\\home\\LogFiles\\http\\RawLogs\\log-.txt", rollingInterval: RollingInterval.Day)
+        .CreateLogger();
+
+      Log.Logger = logger;
     }
 
     #endregion
